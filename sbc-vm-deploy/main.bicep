@@ -20,7 +20,6 @@ param existingSBCVnetResourceGrpName string
 @secure()
 param localAdminName string
 @secure()
-param localAdminPass string
 param virtualVmSize string
 // param sbcVmNames array = [
 //   {
@@ -86,8 +85,6 @@ resource existingInternalNetorOtherSubnet 'Microsoft.Network/virtualNetworks/sub
   name: hfeToInternalsubnetName
 }
 
-
-
 // module sbcVirtualMachines 'modules/sbcVms.bicep' = [for i in sbcVmNames: {
 //   scope: resourceGroup(sbcResourceGroup.name)
 //   name: '${i.name}'
@@ -117,16 +114,11 @@ module voiceStorage 'modules/storageAcct.bicep' = [ for each in storageAccoutNam
 }
 ]
 
-// resource voiceBlobContainers 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-01-01' = [ for each in storageAccoutNames : {
-//   scope: resourceGroup(sbcResourceGroup.name)
-//   name: '${voiceStorage.name}/default/${each}'
-// }]
-
 module hfeOne 'modules/hfeVms.bicep' =  {
   scope: resourceGroup(sbcResourceGroup.name)
   name: 'hfe1'
   params: {
-    vmName: 'dilzprod-vm-cl1vfe-1d'
+    vmName: 'dilz-vm-cl1vfe-1d'
     location: sbcResourceGroup.location
     tags: sbcResourceGroup.tags
     vnetId: existingSBCvnet.id
@@ -134,7 +126,6 @@ module hfeOne 'modules/hfeVms.bicep' =  {
     secondNic: sbcMgmtSubnet.name
     thirdNic: sbcUntrustedSubnet.name
     localAdminName: localAdminName
-    localAdminPassword: localAdminPass
     vmSize: virtualVmSize
   }
 }
@@ -143,7 +134,7 @@ module hfeTwo 'modules/hfeVms.bicep' =  {
   scope: resourceGroup(sbcResourceGroup.name)
   name: 'hfe2'
   params: {
-    vmName: 'dilzprod-vm-cl1vfe-2d'
+    vmName: 'dilz-vm-cl1vfe-2d'
     location: sbcResourceGroup.location
     tags: sbcResourceGroup.tags
     vnetId: existingSBCvnet.id
@@ -151,7 +142,6 @@ module hfeTwo 'modules/hfeVms.bicep' =  {
     secondNic: sbcMgmtSubnet.name
     thirdNic: sbcTrustedSubnet.name
     localAdminName: localAdminName
-    localAdminPassword: localAdminPass
     vmSize: virtualVmSize
   }
 }

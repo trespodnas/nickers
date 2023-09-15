@@ -3,13 +3,13 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "existingResourceGroupName": {
-      "value": "dilzprod-rg-sbc"
+      "value": "dilz-rg-sbc-prod"
     },
     "existingSBCvnetName": {
-      "value": "dilzprod-net-vnt-sbc01"
+      "value": "dilz-vnet-sbc01-prod"
     },
     "existingSBCVnetResourceGrpName": {
-      "value": "dilzprod-rg-sbc"
+      "value": "dilz-rg-sbc-prod"
     },
     "sbcMGMTsubnetName": {
       "value": "dilzprod-net-snt-Mgmt"
@@ -28,9 +28,6 @@
     },
     "localAdminName": {
       "value": "local-admin"
-    },
-    "localAdminPass": {
-      "value": "pYm2UJjXLRazSd3X"
     },
     "virtualVmSize": {
       "value": "Standard_F8s_v2"
