@@ -6,7 +6,12 @@ param sbcResourceGroupLocation string
 param sbcResourceGroupTags  object
 
 // Nsg details
-param sbcNsgName string
+param sbcFePublicNameSubnetNSG string = 'publicSubnetNsg'
+param sbcFeInternalNameSubnetNsg string = 'internalSubnetNsg'
+param sbcUntrustedNetworkSubnetNsg string = 'unTrustedSubnetNsg'
+param sbcTrustedNetworkSubnetNsg string = 'trustedSubnetNsg'
+param sbcMgmtNetworkSubnetNsg string = 'mgmtSubnetNsg'
+param sbcHAnetworkSubnetNsg string = 'HASubnetNsg'
 param sbcNsgLocation string
 
 
@@ -34,11 +39,11 @@ resource sbcResourceGroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   tags: sbcResourceGroupTags
 }
 
-module sbcNsg 'modules/nsg.bicep' = {
+module publicSubnetNSG 'modules/publicSubnetNsg.bicep' = {
   scope: resourceGroup(sbcResourceGroupName)
-  name: sbcNsgName
+  name: sbcFePublicNameSubnetNSG
   params: {
-    nsgName: sbcNsgName
+    nsgName: sbcFePublicNameSubnetNSG
     nsgLocation: sbcNsgLocation
     }
     dependsOn:[
@@ -46,17 +51,66 @@ module sbcNsg 'modules/nsg.bicep' = {
     ]
 }
 
+module internalSubnetNsg 'modules/nsgGeneric.bicep' = {
+  scope: resourceGroup(sbcResourceGroupName)
+  name: sbcFeInternalNameSubnetNsg
+  params:{
+    nsgName: sbcFeInternalNameSubnetNsg
+    nsgLocation:sbcNsgLocation
+  }
+}
+
+module unTrustedSubnetNsg 'modules/nsgGeneric.bicep' = {
+  scope: resourceGroup(sbcResourceGroupName)
+  name: sbcUntrustedNetworkSubnetNsg
+  params:{
+    nsgName: sbcUntrustedNetworkSubnetNsg
+    nsgLocation:sbcNsgLocation
+  }
+}
+
+module trustedSubnetNsg 'modules/nsgGeneric.bicep' = {
+  scope: resourceGroup(sbcResourceGroupName)
+  name: sbcTrustedNetworkSubnetNsg
+  params:{
+    nsgName: sbcTrustedNetworkSubnetNsg
+    nsgLocation:sbcNsgLocation
+  }
+}
+
+module mgmtSubnetNsg 'modules/nsgGeneric.bicep' = {
+  scope: resourceGroup(sbcResourceGroupName)
+  name: sbcMgmtNetworkSubnetNsg
+  params:{
+    nsgName: sbcMgmtNetworkSubnetNsg
+    nsgLocation:sbcNsgLocation
+  }
+}
+
+module HASubnetNsg 'modules/nsgGeneric.bicep' = {
+  scope: resourceGroup(sbcResourceGroupName)
+  name: sbcHAnetworkSubnetNsg
+  params:{
+    nsgName: sbcHAnetworkSubnetNsg
+    nsgLocation:sbcNsgLocation
+  }
+}
 
 module sbcVnetDeployment 'modules/vnet.bicep' = {
   scope: resourceGroup(sbcResourceGroupName)
   name: 'sbcVnetDeployment'
   params: {
-    sbcNsgId: sbcNsg.outputs.nsgId
+    sbcFePublicNameSubnetNsg: publicSubnetNSG.outputs.nsgId
+    sbcFeInternalNameSubnetNsg: internalSubnetNsg.outputs.nsgId
+    sbcUntrustedNetworkSubnetNsg: unTrustedSubnetNsg.outputs.nsgId
+    sbcTrustedNetworkSubnetNsg: trustedSubnetNsg.outputs.nsgId
+    sbcMgmtNetworkSubnetNsg: mgmtSubnetNsg.outputs.nsgId
+    sbcHAnetworkSubnetNsg: HASubnetNsg.outputs.nsgId
     virtualNetworkName: sbcVnetName
     virtualNetworkLocation: sbcResourceGroup.location
     virtualNetworkTags: sbcResourceGroupTags
     virtualNetworkAddressSpace: sbcVnetBaseAddressSpace
-    sbcHAnetworkSubnetName: sbcHaNetworkName
+    sbcHAnetworkSubnetName: sbcHaNetworkName 
     sbcHAnetworkSubnetPrefix: sbcHaNetworkPrefix
     sbcMgmtNetworkSubnetName: sbcMgmtNetworkName
     sbcMgmtNetworkSubnetPrefix: sbcMgmtNetworkPrefix
@@ -68,8 +122,10 @@ module sbcVnetDeployment 'modules/vnet.bicep' = {
     sbcFeInternalPrefix: sbcFeInternalPrefix
     sbcFePublicName: sbcFePublicName
     sbcFePublicPrefix: sbcFePublicPrefix
+    
   }
   dependsOn: [
-    sbcNsg
+    publicSubnetNSG, internalSubnetNsg, unTrustedSubnetNsg, trustedSubnetNsg, mgmtSubnetNsg, HASubnetNsg
+
   ]
 }

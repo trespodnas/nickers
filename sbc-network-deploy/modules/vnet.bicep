@@ -1,7 +1,12 @@
 
 
 // Nsg settings
-param sbcNsgId string
+param sbcFePublicNameSubnetNsg string
+param sbcFeInternalNameSubnetNsg string
+param sbcUntrustedNetworkSubnetNsg string
+param sbcTrustedNetworkSubnetNsg string
+param sbcMgmtNetworkSubnetNsg string
+param sbcHAnetworkSubnetNsg string
 
 // Vnet settings
 param virtualNetworkName string
@@ -55,6 +60,9 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-02-01' = {
           delegations: []
           privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
+          networkSecurityGroup: {
+            id: sbcHAnetworkSubnetNsg
+          }
          }
         type: 'Microsoft.Network/virtualNetworks/subnets'
       }
@@ -66,6 +74,9 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-02-01' = {
           delegations: []
           privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
+          networkSecurityGroup: {
+            id: sbcMgmtNetworkSubnetNsg
+          }
         }
         type: 'Microsoft.Network/virtualNetworks/subnets'
       }
@@ -77,6 +88,9 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-02-01' = {
           delegations: []
           privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
+          networkSecurityGroup: {
+            id: sbcTrustedNetworkSubnetNsg
+          }
         }
         type: 'Microsoft.Network/virtualNetworks/subnets'
       }
@@ -88,6 +102,9 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-02-01' = {
           delegations: []
           privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
+          networkSecurityGroup: {
+            id: sbcUntrustedNetworkSubnetNsg
+          }
         }
         type: 'Microsoft.Network/virtualNetworks/subnets'
       }
@@ -99,6 +116,9 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-02-01' = {
           delegations: []
           privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
+          networkSecurityGroup: {
+            id: sbcFeInternalNameSubnetNsg
+          }
         }
         type: 'Microsoft.Network/virtualNetworks/subnets'
       }
@@ -111,7 +131,7 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-02-01' = {
           privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
           networkSecurityGroup: {
-            id: sbcNsgId
+            id: sbcFePublicNameSubnetNsg
           }
         }
         type: 'Microsoft.Network/virtualNetworks/subnets'
