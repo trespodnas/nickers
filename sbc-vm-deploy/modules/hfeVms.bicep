@@ -83,7 +83,7 @@ resource hveVms 'Microsoft.Compute/virtualMachines@2023-03-01' = {
       imageReference: {
         publisher: 'Canonical'
         offer: '0001-com-ubuntu-pro-bionic'
-        sku: '18_04-lts-gen2'
+        sku: 'pro-18_04-lts-gen2'
         version: 'latest'
       }
       osDisk: {
@@ -96,7 +96,6 @@ resource hveVms 'Microsoft.Compute/virtualMachines@2023-03-01' = {
         vTpmEnabled: true
       }
       encryptionAtHost: true
-      securityType: 'TrustedLaunch'
     }
     networkProfile: {
       networkInterfaces: [
