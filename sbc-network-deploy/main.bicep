@@ -12,7 +12,7 @@ param sbcUntrustedNetworkSubnetNsg string = 'unTrustedSubnetNsg'
 param sbcTrustedNetworkSubnetNsg string = 'trustedSubnetNsg'
 param sbcMgmtNetworkSubnetNsg string = 'mgmtSubnetNsg'
 param sbcHAnetworkSubnetNsg string = 'HASubnetNsg'
-param sbcNsgLocation string
+param sbcNsgLocation string = sbcResourceGroupLocation
 
 
 // Vnet details

@@ -14,12 +14,6 @@
         "Env": "faux prod"
       }
     },
-    "sbcNsgName": {
-      "value": "dilzprod-net-nsg-sbc01"
-    },
-    "sbcNsgLocation": {
-      "value": "EastUs"
-    },
     "sbcVnetName": {
       "value": "dilzprod-net-vnt-sbc01"
     },
