@@ -91,10 +91,6 @@ resource hveVms 'Microsoft.Compute/virtualMachines@2023-03-01' = {
       }
     }
     securityProfile: {
-      uefiSettings: {
-        secureBootEnabled: true
-        vTpmEnabled: true
-      }
       encryptionAtHost: true
     }
     networkProfile: {
