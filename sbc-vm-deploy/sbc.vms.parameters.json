@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "existingResourceGroupName": {
+      "value": "dilzprod-rg-sbc"
+    },
+    "existingSBCvnetName": {
+      "value": "dilzprod-net-vnt-sbc01"
+    },
+    "existingSBCVnetResourceGrpName": {
+      "value": "dilzprod-rg-sbc"
+    },
+    "sbcMGMTsubnetName": {
+      "value": "dilzprod-net-snt-Mgmt"
+    },
+    "sbcTrustedsubnetName": {
+      "value": "dilzprod-net-snt-Trusted"
+    },
+    "sbcUnTrustedsubnetName": {
+      "value": "dilzprod-net-snt-Untrusted"
+    },
+    "hfeToFlow3subnetName": {
+      "value": "dilzprod-net-snt-FEpublic"
+    },
+    "hfeToInternalsubnetName": {
+      "value": "dilzprod-net-snt-FEinternal"
+    },
+    "localAdminName": {
+      "value": "local-admin"
+    },
+    "localAdminPass": {
+      "value": "pYm2UJjXLRazSd3X"
+    },
+    "virtualVmSize": {
+      "value": "Standard_F8s_v2"
+    }
+  }
+}

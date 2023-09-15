@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sbcResourceGroupName": {
+      "value": "dilzprod-rg-sbc"
+    },
+    "sbcResourceGroupLocation": {
+      "value": "EastUs"
+    },
+    "sbcResourceGroupTags": {
+      "value": {
+        "Owner": "ownerName",
+        "Env": "faux prod"
+      }
+    },
+    "sbcNsgName": {
+      "value": "dilzprod-net-nsg-sbc01"
+    },
+    "sbcNsgLocation": {
+      "value": "EastUs"
+    },
+    "sbcVnetName": {
+      "value": "dilzprod-net-vnt-sbc01"
+    },
+    "sbcVnetBaseAddressSpace": {
+      "value": "140.28.24.0/24"
+    },
+    "sbcHaNetworkName": {
+      "value": "dilzprod-net-snt-HA"
+    },
+    "sbcHaNetworkPrefix": {
+      "value": "140.28.24.160/27"
+    },
+    "sbcMgmtNetworkName": {
+      "value": "dilzprod-net-snt-Mgmt"
+    },
+    "sbcMgmtNetworkPrefix": {
+      "value": "140.28.24.128/27"
+    },
+    "sbcTrustedNetworkName": {
+      "value": "dilzprod-net-snt-Trusted"
+    },
+    "sbcTrustedNetworkPrefix": {
+      "value": "140.28.24.96/27"
+    },
+    "sbcUnTrustedNetworkName": {
+      "value": "dilzprod-net-snt-Untrusted"
+    },
+    "sbcUnTrustedNetworkPrefix": {
+      "value": "140.28.24.64/27"
+    },
+    "sbcFeInternalName": {
+      "value": "dilzprod-net-snt-FEinternal"
+    },
+    "sbcFeInternalPrefix": {
+      "value": "140.28.24.32/27"
+    },
+    "sbcFePublicName": {
+      "value": "dilzprod-net-snt-FEpublic"
+    },
+    "sbcFePublicPrefix": {
+      "value": "140.28.24.0/27"
+    }
+  }
+}
