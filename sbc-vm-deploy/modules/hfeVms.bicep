@@ -75,15 +75,14 @@ resource hveVms 'Microsoft.Compute/virtualMachines@2023-03-01' = {
         }
       }
     }
-
     hardwareProfile: {
       vmSize: vmSize
     }
     storageProfile: {
-      imageReference: {
+      imageReference:{
         publisher: 'Canonical'
-        offer: '0001-com-ubuntu-pro-bionic'
-        sku: 'pro-18_04-lts-gen2'
+        offer: 'UbuntuServer'
+        sku: '18_04-lts-gen2'
         version: 'latest'
       }
       osDisk: {
