@@ -21,6 +21,7 @@ param existingSBCVnetResourceGrpName string
 param localAdminName string
 @secure()
 param virtualVmSize string
+param existingAzPubKeyName string
 // param sbcVmNames array = [
 //   {
 //     name: '${vmName}-sbc1'
@@ -119,6 +120,7 @@ module hfeOne 'modules/hfeVms.bicep' =  {
   name: 'hfe1'
   params: {
     vmName: 'dilz-vm-cl1vfe-1d'
+    vmExistingAzPubKeyName: existingAzPubKeyName
     location: sbcResourceGroup.location
     tags: sbcResourceGroup.tags
     vnetId: existingSBCvnet.id
@@ -135,6 +137,7 @@ module hfeTwo 'modules/hfeVms.bicep' =  {
   name: 'hfe2'
   params: {
     vmName: 'dilz-vm-cl1vfe-2d'
+    vmExistingAzPubKeyName: existingAzPubKeyName
     location: sbcResourceGroup.location
     tags: sbcResourceGroup.tags
     vnetId: existingSBCvnet.id

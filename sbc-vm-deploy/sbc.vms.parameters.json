@@ -30,7 +30,10 @@
       "value": "local-admin"
     },
     "virtualVmSize": {
-      "value": "Standard_F8s_v2"
+      "value": "Standard_DS3_v2"
+    },
+    "existingAzPubKeyName": {
+      "value": "voice-ssh"
     }
   }
 }

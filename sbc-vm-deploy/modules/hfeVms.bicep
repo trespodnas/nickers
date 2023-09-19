@@ -11,6 +11,7 @@ param thirdNic string
 
 // Vm options
 param vmName string
+param vmExistingAzPubKeyName string
 param tags object
 param location string
 param localAdminName string
@@ -30,6 +31,11 @@ param hfeSecondaryNics array = [
   }
 
 ]
+  
+resource existingSshPubKey 'Microsoft.Compute/sshPublicKeys@2023-07-01' existing ={
+  name: vmExistingAzPubKeyName
+}
+
 
 resource hfeNics 'Microsoft.Network/networkInterfaces@2023-02-01' = [for nic in hfeSecondaryNics: {
   name: nic.name
@@ -68,7 +74,7 @@ resource hveVms 'Microsoft.Compute/virtualMachines@2023-03-01' = {
         ssh: {
           publicKeys:[
             {
-              keyData:'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCXwJDohmnTxEH7F6/IR9AgApGWUT671Nu/Y4pln2XVk0YtswnkeE4aVnsrWvOpLVxv5alL22VR5VP3vyMd03GsLadwd40pZpdNiOTygfoaaURMzTkaBs+KSltQvFtAfgOMoO0f/zlgfyVzK/1DdwaAu1LFLMB5vpCP76pDu1oL6k9vK7DgiFEKiIBMoTwC9ak/Ois6/NUbupH7pv6L616z7qUX0Jz5ehSfrI3C22+UcrBxJspfWv/+pcGOZ1lICiw7VPvt/++f0XNUG/3KxsWw0V9klP7FaFyY6Z3NuA8Pb1GBmYSVcZY9nd2YPuXYH8Y92dZsibHMv2MEwvtC//FuzadCtNWlS+34Qho8PdwzA8swA4vd6KDwYKmhsHPrgxE25DvyxeKDPYfnFlYNdoD1gRXgGCGbjoUSJcjD7FUaey1iWUhQ1p0iHHUb0wHfJ70DtWsP/VUypAR/dBlTgYL0kpoIvmxZbytBVkxsBOfxfin9zlueN3sM2fq6sfMYCOoiNMKKQXnOw1qkwuviitX/ewgi9zTRjLdLYEw4e5rHe5YG1v0wTio14/NQIngeex8NvdfTTuxd2C6oDPJ19SqCA5bz2+tOMK57vCBtlo2/VJhYLcUZgSI3wbGWNobIFBAf/xOhYn4HN7Jthu6jAk4C3iuEeYv8UiUf9ufhLocjwQ== sbcAdminAcct'
+              keyData: existingSshPubKey.properties.publicKey
               path: '/home/${localAdminName}/.ssh/authorized_keys'
             }
           ]
