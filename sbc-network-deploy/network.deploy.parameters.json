@@ -3,19 +3,18 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "sbcResourceGroupName": {
-      "value": "dilzprod-rg-sbc"
+      "value": "dilz-rg-sbc-prod"
     },
     "sbcResourceGroupLocation": {
       "value": "EastUs"
     },
     "sbcResourceGroupTags": {
       "value": {
-        "Owner": "ownerName",
-        "Env": "faux prod"
+        "Environment": "dilzprod-sbc"
       }
     },
     "sbcVnetName": {
-      "value": "dilzprod-net-vnt-sbc01"
+      "value": "dilz-vnet-sbc01-prod"
     },
     "sbcVnetBaseAddressSpace": {
       "value": "140.28.24.0/24"
