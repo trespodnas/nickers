@@ -1,0 +1,65 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sbcResourceGroupName": {
+      "value": "rg-nelson"
+    },
+    "sbcResourceGroupTags": {
+      "value": {
+        "env": "test"
+      }
+    },
+    "sbcVnetName": {
+      "value": "vnet-nelson"
+    },
+    "sbcVnetBaseAddressSpace": {
+      "value": "140.28.24.0/24"
+    },
+    "enclaveCidr": {
+      "value": "140.28.1.0/24"
+    },
+    "afnetCidr": {
+      "value": "140.28.24.0/21"
+    },
+    "internalHubCidr": {
+      "value": "140.28.0.0/24"
+    },
+    "bcapFirewallIpAddress": {
+      "value": "140.28.2.4"
+    },
+    "externalBoundaryFirewallIpAddress": {
+      "value": "140.28.1.4"
+    },
+    "internalFirewallIpAddress": {
+      "value": "140.28.0.4"
+    },
+    "externalBoundaryHubSubscriptionId": {
+      "value": ""
+    },
+    "externalBoundaryHubResourceGroupName": {
+      "value": ""
+    },
+    "externalBoundaryHubNetworkName": {
+      "value": ""
+    },
+    "bcapHubSubscriptionId": {
+      "value": ""
+    },
+    "bcapHubResourceGroupName": {
+      "value": ""
+    },
+    "bcapHubNetworkName": {
+      "value": ""
+    },
+    "internalHubSubscriptionId": {
+      "value": ""
+    },
+    "internalHubResourceGroupName": {
+      "value": ""
+    },
+    "internalHubNetworkName": {
+      "value": ""
+    }
+  }
+}
